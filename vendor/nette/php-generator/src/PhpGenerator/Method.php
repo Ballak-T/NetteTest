@@ -5,6 +5,8 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
+declare(strict_types=1);
+
 namespace Nette\PhpGenerator;
 
 use Nette;
@@ -13,15 +15,18 @@ use Nette;
 /**
  * Class method.
  *
- * @property string|FALSE $body
+ * @property string|NULL $body
  */
-class Method
+final class Method
 {
 	use Nette\SmartObject;
 	use Traits\FunctionLike;
 	use Traits\NameAware;
 	use Traits\VisibilityAware;
 	use Traits\CommentAware;
+
+	/** @var string|NULL */
+	private $body = '';
 
 	/** @var bool */
 	private $static = FALSE;
@@ -34,38 +39,29 @@ class Method
 
 
 	/**
-	 * @param  callable
 	 * @return static
 	 */
-	public static function from($method)
+	public static function from($method): self
 	{
-		$method = $method instanceof \ReflectionFunctionAbstract ? $method : Nette\Utils\Callback::toReflection($method);
-		if ($method instanceof \ReflectionFunction) {
-			trigger_error('For global functions or closures use Nette\PhpGenerator\GlobalFunction or Nette\PhpGenerator\Closure.', E_USER_DEPRECATED);
-			return (new Factory)->fromFunctionReflection($method);
+		if ($method instanceof \ReflectionMethod) {
+			trigger_error(__METHOD__ . '() accepts only method name.', E_USER_DEPRECATED);
+		} else {
+			$method = Nette\Utils\Callback::toReflection($method);
 		}
 		return (new Factory)->fromMethodReflection($method);
 	}
 
 
-	/**
-	 * @param  string
-	 */
-	public function __construct($name)
+	public function __construct(string $name)
 	{
-		if ($name === NULL) {
-			throw new Nette\DeprecatedException('For closures use Nette\PhpGenerator\Closure instead of Nette\PhpGenerator\Method.');
-		} elseif (!Helpers::isIdentifier($name)) {
+		if (!Helpers::isIdentifier($name)) {
 			throw new Nette\InvalidArgumentException("Value '$name' is not valid name.");
 		}
 		$this->name = $name;
 	}
 
 
-	/**
-	 * @return string  PHP code
-	 */
-	public function __toString()
+	public function __toString(): string
 	{
 		return Helpers::formatDocComment($this->comment . "\n")
 			. ($this->abstract ? 'abstract ' : '')
@@ -77,25 +73,29 @@ class Method
 			. $this->name
 			. $this->parametersToString()
 			. $this->returnTypeToString()
-			. ($this->abstract || $this->body === FALSE
+			. ($this->abstract || $this->body === NULL
 				? ';'
 				: "\n{\n" . Nette\Utils\Strings::indent(ltrim(rtrim($this->body) . "\n"), 1) . '}');
 	}
 
 
 	/**
-	 * @param  string|FALSE
+	 * @param  string|NULL
 	 * @return static
 	 */
-	public function setBody($code, array $args = NULL)
+	public function setBody($code, array $args = NULL): self
 	{
+		if ($code === FALSE) {
+			$code = NULL;
+			trigger_error(__METHOD__ . '() use NULL instead of FALSE', E_USER_DEPRECATED);
+		}
 		$this->body = $args === NULL ? $code : Helpers::formatArgs($code, $args);
 		return $this;
 	}
 
 
 	/**
-	 * @return string|FALSE
+	 * @return string|NULL
 	 */
 	public function getBody()
 	{
@@ -104,60 +104,48 @@ class Method
 
 
 	/**
-	 * @param  bool
 	 * @return static
 	 */
-	public function setStatic($state = TRUE)
+	public function setStatic(bool $state = TRUE): self
 	{
-		$this->static = (bool) $state;
+		$this->static = $state;
 		return $this;
 	}
 
 
-	/**
-	 * @return bool
-	 */
-	public function isStatic()
+	public function isStatic(): bool
 	{
 		return $this->static;
 	}
 
 
 	/**
-	 * @param  bool
 	 * @return static
 	 */
-	public function setFinal($state = TRUE)
+	public function setFinal(bool $state = TRUE): self
 	{
-		$this->final = (bool) $state;
+		$this->final = $state;
 		return $this;
 	}
 
 
-	/**
-	 * @return bool
-	 */
-	public function isFinal()
+	public function isFinal(): bool
 	{
 		return $this->final;
 	}
 
 
 	/**
-	 * @param  bool
 	 * @return static
 	 */
-	public function setAbstract($state = TRUE)
+	public function setAbstract(bool $state = TRUE): self
 	{
-		$this->abstract = (bool) $state;
+		$this->abstract = $state;
 		return $this;
 	}
 
 
-	/**
-	 * @return bool
-	 */
-	public function isAbstract()
+	public function isAbstract(): bool
 	{
 		return $this->abstract;
 	}
