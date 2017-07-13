@@ -4,9 +4,38 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3350afb1107cfaf285201969b30e0ef2",
-    "content-hash": "7e4cc68badb319feb528695252fd436f",
+    "hash": "9efbfb300aa4a627b7a8f591a3ed9ed4",
+    "content-hash": "245d7ee4e8e6d31676ec202e9ce3b4c1",
     "packages": [
+        {
+            "name": "dg/adminer-custom",
+            "version": "v1.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dg/adminer-custom.git",
+                "reference": "023279c5803b4d2580f5934d1c178ce4838a1ae9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dg/adminer-custom/zipball/023279c5803b4d2580f5934d1c178ce4838a1ae9",
+                "reference": "023279c5803b4d2580f5934d1c178ce4838a1ae9",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Customization for Adminer, the best database management tool written in PHP.",
+            "keywords": [
+                "database",
+                "elasticsearch",
+                "mongodb",
+                "mssql",
+                "mysql",
+                "oracle",
+                "postgresql",
+                "sqlite"
+            ],
+            "time": "2017-04-12 16:27:46"
+        },
         {
             "name": "dg/composer-cleaner",
             "version": "v1.1",

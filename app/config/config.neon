@@ -21,9 +21,9 @@ extensions:
 	doctrine: Kdyby\Doctrine\DI\OrmExtension
 
 doctrine:
-	user: root
-	password: pass
-	dbname: sandbox
+	user: doctrine
+	password: '***'
+	dbname: doctrine_online
 	metadata:
 		App: %appDir%
 events:

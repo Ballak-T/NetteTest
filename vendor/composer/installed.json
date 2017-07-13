@@ -2464,5 +2464,36 @@
             "nette",
             "orm"
         ]
+    },
+    {
+        "name": "dg/adminer-custom",
+        "version": "v1.9.1",
+        "version_normalized": "1.9.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dg/adminer-custom.git",
+            "reference": "023279c5803b4d2580f5934d1c178ce4838a1ae9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/dg/adminer-custom/zipball/023279c5803b4d2580f5934d1c178ce4838a1ae9",
+            "reference": "023279c5803b4d2580f5934d1c178ce4838a1ae9",
+            "shasum": ""
+        },
+        "time": "2017-04-12 16:27:46",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "Customization for Adminer, the best database management tool written in PHP.",
+        "keywords": [
+            "database",
+            "elasticsearch",
+            "mongodb",
+            "mssql",
+            "mysql",
+            "oracle",
+            "postgresql",
+            "sqlite"
+        ]
     }
 ]

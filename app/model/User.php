@@ -1,22 +1,17 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: ballin
  * Date: 13.7.17
- * Time: 13:03
+ * Time: 15:25
  */
 
 namespace App;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
 
-class Article
+class User
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -26,34 +21,32 @@ class Article
     protected $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
 
-    protected $idUser;
+    protected $name;
 
     /**
      * @ORM\Column(type="string")
      */
 
-    protected $title;
+    protected $surname;
 
     /**
      * @ORM\Column(type="string")
      */
 
-    protected $topic;
+    protected $email;
 
     /**
      * @ORM\Column(type="string")
      */
 
-    protected $content;
+    protected $htmlText;
 
     /**
      * @ORM\Column(type="string")
      */
 
     protected $created;
-
 }
-
