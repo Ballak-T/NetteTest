@@ -7,7 +7,7 @@
  * Time: 13:03
  */
 
-namespace App;
+namespace App\Model;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,9 +27,11 @@ class Article
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="User", cascade={"persist"})
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id")
      */
 
-    protected $idUser;
+    protected $user;
 
     /**
      * @ORM\Column(type="string")
