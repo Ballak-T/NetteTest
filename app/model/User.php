@@ -3,12 +3,15 @@
  * Created by PhpStorm.
  * User: ballin
  * Date: 13.7.17
- * Time: 15:25
+ * Time: 20:18
  */
 
-namespace App;
+namespace App\Model;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ */
 
 class User
 {

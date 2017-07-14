@@ -1,12 +1,18 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: ballin
+ * Date: 14.7.17
+ * Time: 14:39
+ */
 
 namespace App\Presenters;
 
 use Nette,
-    App\Model as Model;
+    App\Model\Article as Article;
 
 
-class HomepagePresenter extends Nette\Application\UI\Presenter
+class ArticlePresenter extends Nette\Application\UI\Presenter
 {
     /**
      * @inject
@@ -17,7 +23,7 @@ class HomepagePresenter extends Nette\Application\UI\Presenter
 
     public function renderDfault()
     {
-        $dao = $this->EntityManager->getRepository(Model::getClassNme());
+        $dao = $this->EntityManager->getRepository(Article::class);
         //dump($dao->findAll());
         $this->template->articles = $dao->findAll();
         exit();
