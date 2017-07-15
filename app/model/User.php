@@ -75,7 +75,31 @@ class User
     }
     public function setPassword($password)
     {
-        $this->password = Passwords::hash($password, ['cost' => 12]);
+        $this->password = Passwords::hash($password);
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    public function getHtmlText()
+    {
+        return $this->htmlText;
     }
     public function setHtmlText($htmlText)
     {

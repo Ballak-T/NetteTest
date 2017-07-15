@@ -10,6 +10,7 @@ namespace App\Presenters;
 
 use Nette,
     App\ArticleModule\Entity\Article,
+    App\UserModule\Service\UserService,
     Nette\Application\UI;
 
 
@@ -22,11 +23,11 @@ class ArticlePresenter extends Nette\Application\UI\Presenter
      */
 
     public $EntityManager;
+    const DEFAULT_ARTICLE_URL = 'home';
 
     protected function createComponentAddingForm()
     {
         $form = new UI\Form;
-        $form->addText('name', 'Autor:');
         $form->addText('title', 'Napis:');
         $form->addText('topic', 'Téma');
         $form->addTextArea('content', 'Obsah');
@@ -42,12 +43,15 @@ class ArticlePresenter extends Nette\Application\UI\Presenter
         $this->flashMessage('Článek byl úspěšně přidán');
         $this->redirect('Article:');
     }
-
-    public function render()
+    public function renderDefault($url)
     {
-        $dao = $this->EntityManager->getRepository(Article::class);
-        //dump($dao->findAll());
-        $this->template->articles = $dao->findAll();
-        exit();
+        if (!$url) $url = self::DEFAULT_ARTICLE_URL;
+        $user = $this->getUser();
+        if ($user->isLoggedIn() === 'ne')
+        {
+            $this->redirect('Home:');
+        }else{
+
+        }
     }
 }

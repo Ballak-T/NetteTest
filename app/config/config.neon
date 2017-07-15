@@ -13,6 +13,7 @@ session:
 
 services:
 	router: App\RouterFactory::createRouter
+	authenticator: App\UserModule\Login\LoginAuthenticator
 	- App\ArticleModule\Service\ArticleService
 	- App\UserModule\Service\UserService
 

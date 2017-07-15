@@ -34,6 +34,9 @@ class RegistrationPresenter extends Nette\Application\UI\Presenter
         $form->addPassword('password_check', 'Heslo znovu')
             ->setRequired(true)
             ->addRule(Form::EQUAL, 'Hesla se neshodují',$form['password']);
+        $form->addTextArea('htmlcontent', 'Html obsah')
+            ->setRequired(true)
+            ->addRule(Form::MIN_LENGTH, 'Html obsah má mít aspoň %d znaků',10);
         $form->addSubmit('send','Registrovat');
         $form->onSuccess[] = [$this, 'registrationFormSucceeded'];
         return $form;
