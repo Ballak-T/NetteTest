@@ -6,8 +6,10 @@
  * Time: 20:18
  */
 
-namespace App\Model;
+namespace App\UserModule\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Nette\Security\Passwords;
+use Nette\Utils\DateTime;
 
 /**
  * @ORM\Entity
@@ -45,6 +47,12 @@ class User
      * @ORM\Column(type="string")
      */
 
+    protected $password;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+
     protected $htmlText;
 
     /**
@@ -52,4 +60,30 @@ class User
      */
 
     protected $created;
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+    }
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+    public function setPassword($password)
+    {
+        $this->password = Passwords::hash($password, ['cost' => 12]);
+    }
+    public function setHtmlText($htmlText)
+    {
+        $this->htmlText = $htmlText;
+    }
+    public function setTime()
+    {
+        $date = new DateTime();
+        $this->created = $date->getTimestamp();
+    }
 }

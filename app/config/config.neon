@@ -13,8 +13,8 @@ session:
 
 services:
 	router: App\RouterFactory::createRouter
-	- App\Model\Article
-	- App\Model\User
+	- App\ArticleModule\Service\ArticleService
+	- App\UserModule\Service\UserService
 
 extensions:
 	console: Kdyby\Console\DI\ConsoleExtension

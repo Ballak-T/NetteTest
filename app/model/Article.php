@@ -7,7 +7,7 @@
  * Time: 13:03
  */
 
-namespace App\Model;
+namespace App\ArticleModule\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,5 +57,19 @@ class Article
 
     protected $created;
 
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+    public function setTopic($topic)
+    {
+        $this->topic = $topic;
+    }
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+    public function time(){
+        $this->created = time();
+    }
 }
-

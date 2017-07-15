@@ -9,7 +9,9 @@
 namespace App\Presenters;
 
 use Nette,
-    App\Model\Article as Article;
+    App\ArticleModule\Entity\Article,
+    Nette\Application\UI;
+
 
 
 class ArticlePresenter extends Nette\Application\UI\Presenter
@@ -21,7 +23,27 @@ class ArticlePresenter extends Nette\Application\UI\Presenter
 
     public $EntityManager;
 
-    public function renderDfault()
+    protected function createComponentAddingForm()
+    {
+        $form = new UI\Form;
+        $form->addText('name', 'Autor:');
+        $form->addText('title', 'Napis:');
+        $form->addText('topic', 'Téma');
+        $form->addTextArea('content', 'Obsah');
+        $form->addSubmit('send','Přidat článek');
+        $form->onSuccess[] = [$this, 'addingFormSucceeded'];
+        return $form;
+    }
+
+    public function addingFormSucceeded(UI\Form $form, $values)
+    {
+        // ...
+        //$dao = $this->EntityManager->getRepository(Article::class);
+        $this->flashMessage('Článek byl úspěšně přidán');
+        $this->redirect('Article:');
+    }
+
+    public function render()
     {
         $dao = $this->EntityManager->getRepository(Article::class);
         //dump($dao->findAll());
