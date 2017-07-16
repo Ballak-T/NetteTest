@@ -36,6 +36,6 @@ class LoginAuthenticator implements Security\IAuthenticator
         {
             throw new Security\AuthenticationException('Zadali jste špatné heslo');
         }
-        return new Security\Identity($user->getId(), 'Admin', ['email' => $user->getEmail()]);
+        return new Security\Identity($user->getId(), 'Admin', ['name' => $user->getSurname()]);
     }
 }

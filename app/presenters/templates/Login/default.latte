@@ -1,4 +1,22 @@
 {* This is the welcome page, you can delete it *}
 
 {block content}
+<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
+    {$flash->message}
+</div>
+<div class="container">
+    {ifset $username}
+        <h3 style="display: inline-block;">Přihlášen: {$username}</h3>
+        <span style="position: relative;top:-5px;left: 10px;"><a class="btn btn-lg btn-danger" href="/logout" role="button">Odhlásit</a></span>
+    {/ifset}
+    <div class="jumbotron">
+        <div class="jumbotron">
+            <h1 class="display-3">Nette test</h1>
+            <span><a class="btn btn-lg btn-success" href="/registration" role="button">Registrovat</a></span>
+            <span><a class="btn btn-lg btn-success" href="/login" role="button">Přihlásit</a></span>
+            <span><a class="btn btn-lg btn-success" href="/article" role="button">Přidat článek</a></span>
+        </div>
+        <h2>Přihlášení</h2>
     {control loginForm}
+    </div>
+</div>

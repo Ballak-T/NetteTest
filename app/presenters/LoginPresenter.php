@@ -21,18 +21,28 @@ class LoginPresenter extends Nette\Application\UI\Presenter
     {
         $form = new Form;
         $form->addText('email', 'Email')
-            ->setRequired(true);
+            ->setRequired(true)
+            ->setHtmlAttribute('class', 'form-control');
         $form->addPassword('password', 'Heslo')
-            ->setRequired(true);
-        $form->addSubmit('send','Přihlásit');
+            ->setRequired(true)
+            ->setHtmlAttribute('class', 'form-control');
+        $form->addSubmit('send','Přihlásit')
+            ->setHtmlAttribute('class','btn btn-primary');
+        $render = $form->getRenderer();
+        $render->wrappers['controls']['container'] = NULL;
+        $render->wrappers['pair']['container'] = 'div class=form-group';
+        $render->wrappers['control']['container'] = 'div class=col-sm-9';
+        $render->wrappers['label']['container'] = 'div class="col-sm-3 control-label"';
+        $render->wrappers['control']['description'] = 'span class=help-block';
         $form->onSuccess[] = [$this, 'loginFormSucceeded'];
+        $form->getElementPrototype()->class('form-horizontal');
         return $form;
     }
     public function loginFormSucceeded(Nette\Application\UI\Form $form, $values)
     {
         $email = $values['email'];
         $password = $values['password'];
-
+        $type = 'success';
         $user = $this->getUser();
         if ($user->isLoggedIn() === 'ano')
         {
@@ -45,12 +55,24 @@ class LoginPresenter extends Nette\Application\UI\Presenter
                 $user->setExpiration('2 days');
             }catch (Nette\Security\AuthenticationException $e) {
                 $loginMessage = $e->getMessage();
+                $type='danger';
             }
         }
-        $this->flashMessage($loginMessage);
+        $this->flashMessage($loginMessage,$type);
+    }
+    public function renderDefault($url)
+    {
+        $user = $this->getUser();
+        if (!$user->isLoggedIn())
+        {
+            //$this->redirect('Home:');
+        }else{
+            $this->template->username = $user->getIdentity()->getData()['name'];
+        }
     }
     public function render()
     {
+
         //$dao = $this->EntityManager->getRepository(Article::class);
         //dump($dao->findAll());
         //$this->template->articles = $dao->findAll();

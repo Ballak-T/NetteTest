@@ -2,25 +2,22 @@
 
 namespace App\Presenters;
 
-use App\ArticleModule\Service\ArticleService;
+use App\ArticleModule\Service\ArticleService,
+    App\UserModule\Service\UserService;
 use Nette;
 
 
 class HomepagePresenter extends Nette\Application\UI\Presenter
 {
 
-    /**
-     * @var ArticleService @inject
-     */
-    public $articleService;
-
-    public function renderDefault()
+    public function renderDefault($url)
     {
-        echo 'tes';
-        $this->articleService->createArticle();
-        //$dao = $this->EntityManager->getRepository(User::class);
-        //dump($dao->findAll());
-        //$this->template->articles = $dao->findAll();
-        exit();
+        $user = $this->getUser();
+        if (!$user->isLoggedIn())
+        {
+
+        }else{
+            $this->template->username = $user->getIdentity()->getData()['name'];
+        }
     }
 }

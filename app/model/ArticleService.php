@@ -23,14 +23,16 @@ class ArticleService
     {
         $this->entityManager=$entityManager;
     }
-    public function createArticle()
+    public function createArticle($inputs)
     {
         $article = new Article();
-        $article->setTitle('test');
-        $article->setContent('content');
-        $article->time();
-        $article->setTopic('topic');
+        $article->setUser($inputs['id']);
+        $article->setTitle($inputs['title']);
+        $article->setContent($inputs['content']);
+        $article->setTime();
+        $article->setTopic($inputs['topic']);
         $this->entityManager->persist($article);
         $this->entityManager->flush();
     }
+    //public function getArticles();
 }

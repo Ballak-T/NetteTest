@@ -8,6 +8,7 @@
  */
 
 namespace App\ArticleModule\Entity;
+use Nette\Utils\DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,6 +58,10 @@ class Article
 
     protected $created;
 
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
     public function setTitle($title)
     {
         $this->title = $title;
@@ -69,7 +74,29 @@ class Article
     {
         $this->content = $content;
     }
-    public function time(){
-        $this->created = time();
+    public function setTime()
+    {
+        $date = new DateTime();
+        $this->created = $date->getTimestamp();
+    }
+    public function getUser()
+    {
+        return $this->user;
+    }
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    public function getTopic($topic)
+    {
+        return $this->topic;
+    }
+    public function getContent()
+    {
+        return $this->content;
+    }
+    public function getTime()
+    {
+       return $this->created;
     }
 }
