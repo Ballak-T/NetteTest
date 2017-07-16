@@ -4,17 +4,25 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="{$basePath}/css/bootstrap.min.css">
-	<script src="{$basePath}/js/bootstrap.min.css"></script>
+	<script src="{$basePath}/js/jquery.js"></script>
+	<script src="{$basePath}/js/nette.ajax.js"></script>
 	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+<div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
+    {$flash->message}
+</div>
 
 	{include content}
 
 	{block scripts}
 	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
 	{/block}
+<script>
+    $(function () {
+        $.nette.init();
+    });
+</script>
 </body>
 </html>

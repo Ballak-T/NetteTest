@@ -9,6 +9,7 @@
 namespace App\ArticleModule\Service;
 use Kdyby\Doctrine\EntityManager;
 use App\ArticleModule\Entity\Article;
+use  Nette\Security\User;
 
 class ArticleService
 {
@@ -18,6 +19,7 @@ class ArticleService
      */
 
     private $entityManager;
+
 
     public function __construct(EntityManager $entityManager)
     {
@@ -34,5 +36,12 @@ class ArticleService
         $this->entityManager->persist($article);
         $this->entityManager->flush();
     }
-    //public function getArticles();
+    public function getArticles($id)
+    {
+        $articles = $this->entityManager->getRepository(Article::class)->findBy(array('user'=>$id));
+//        $return['title'] = $articles->getTitle();
+//        $return['topic'] = $articles->getTopic();
+//        $return['content'] = $articles->getContent();
+        return $articles;
+    }
 }

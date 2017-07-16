@@ -11,7 +11,7 @@ use Nette\Application\UI\Form as Form;
 use App\UserModule\Service\UserService;
 use Nette;
 
-class RegistrationPresenter extends Nette\Application\UI\Presenter
+class RegistrationPresenter extends BasePresenter
 {
     /** @var UserService @inject */
     public $userService;
@@ -48,7 +48,7 @@ class RegistrationPresenter extends Nette\Application\UI\Presenter
         $render = $form->getRenderer();
         $render->wrappers['controls']['container'] = NULL;
         $render->wrappers['pair']['container'] = 'div class=form-group';
-        $render->wrappers['control']['container'] = 'div class=col-sm-9';
+        $render->wrappers['control']['container'] = 'div class=col-sm-6';
         $render->wrappers['label']['container'] = 'div class="col-sm-3 control-label"';
         $render->wrappers['control']['description'] = 'span class=help-block';
         $form->onSuccess[] = [$this, 'registrationFormSucceeded'];

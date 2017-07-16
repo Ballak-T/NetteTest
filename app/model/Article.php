@@ -87,7 +87,7 @@ class Article
     {
         return $this->title;
     }
-    public function getTopic($topic)
+    public function getTopic()
     {
         return $this->topic;
     }
