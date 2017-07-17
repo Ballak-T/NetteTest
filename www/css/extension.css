@@ -1,0 +1,11 @@
+.main{
+    border-radius: 0px 0px 5px 5px !important;
+}
+.alert{
+    width: 50%;
+    margin-left:25%;
+    margin-top: 15px;
+}
+.label{
+    font-size: 12pt;
+}

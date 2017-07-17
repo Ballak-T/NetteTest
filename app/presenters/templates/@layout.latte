@@ -4,21 +4,44 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="{$basePath}/css/bootstrap.min.css">
-	<script src="{$basePath}/js/jquery.js"></script>
-	<script src="{$basePath}/js/nette.ajax.js"></script>
+	<link rel="stylesheet" href="{$basePath}/css/extension.css">
 	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
 </head>
 
 <body>
+
 <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">
-    {$flash->message}
+	{if $flash->type == 'danger'}
+    <strong>Chyba!</strong>
+	{/if}
+    {if $flash->type == 'success'}
+		<strong>Hotovo!</strong>
+    {/if}
+	{$flash->message}
 </div>
-
+<div class="container">
+	<div class="jumbotron main">
+		<div class="jumbotron">
+			<h1 class="display-3">Nette test</h1>
+			<div class="btn-group">
+				<a class="btn btn-lg btn-success" href="/registration" role="button">Registrovat</a>
+				<a class="btn btn-lg btn-success" href="/login" role="button">Přihlásit</a>
+				<a class="btn btn-lg btn-success" href="/article" role="button">Přidat článek</a>
+				{ifset $username}
+				<a class="btn btn-lg btn-danger" href="/logout" role="button">{$username} odhlásit <span class="glyphicon glyphicon-menu-right"></span> </a>
+				{/ifset}
+			</div>
+		</div>
 	{include content}
-
-	{block scripts}
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
-	{/block}
+		<footer class="footer">
+			<span class="label label-info label-lg">&copy; Tomáš Ballák 2017</span>
+		</footer>
+	</div>
+</div>
+{block scripts}
+	<script src="{$basePath}/js/jquery.js"></script>
+	<script src="{$basePath}/js/nette.ajax.js"></script>
+{/block}
 <script>
     $(function () {
         $.nette.init();

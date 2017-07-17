@@ -14,6 +14,7 @@ session:
 services:
 	router: App\RouterFactory::createRouter
 	authenticator: App\UserModule\Login\LoginAuthenticator
+	- Components\ArticleForm
 	- App\ArticleModule\Service\ArticleService
 	- App\UserModule\Service\UserService
 
