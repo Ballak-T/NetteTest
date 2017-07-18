@@ -40,6 +40,7 @@ class ArticleForm extends Control
     {
         $form = new UI\Form;
         $form->setAction('/article/');
+        $form->setMethod('GET');
         $form->addText('title', 'Napis:')
             ->setHtmlAttribute('class', 'form-control')
             ->setRequired(true);
@@ -51,7 +52,7 @@ class ArticleForm extends Control
             ->setRequired(true);
         $form->addSubmit('send','Přidat článek')
             ->setHtmlAttribute('class', 'btn btn-primary');
-        $form->getElementPrototype()->class('form-horizontal ajax');
+        $form->getElementPrototype()->class('form-horizontal');
         $form = $this->wrapForm($form);
         return $form;
     }

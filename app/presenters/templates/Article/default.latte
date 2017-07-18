@@ -3,9 +3,48 @@
         <div class="col-sm-2"></div>
         <h2 class="col-sm-10">Přidat článek</h2>
 
-            {snippet articles}
-                {control addingForm}
-                {ifset $variable}
-                    <h1>{$variable}</h1>
-                {/ifset}
-            {/snippet}
+<form method="GET" action="/article/" class="form-horizontal ajax" id="frm-addingForm">
+    <div class="form-group required">
+        <div class="col-sm-3 control-label"><label for="frm-addingForm-title" class="required">Napis:</label></div>
+
+        <div class="col-sm-6"><input type="text" name="title" class="form-control text" id="frm-addingForm-title" required data-nette-rules='[{"op":":filled","msg":"This field is required."}]'></div>
+    </div>
+
+    <div class="form-group required">
+        <div class="col-sm-3 control-label"><label for="frm-addingForm-topic" class="required">Téma</label></div>
+
+        <div class="col-sm-6"><input type="text" name="topic" class="form-control text" id="frm-addingForm-topic" required data-nette-rules='[{"op":":filled","msg":"This field is required."}]'></div>
+    </div>
+
+    <div class="form-group required">
+        <div class="col-sm-3 control-label"><label for="frm-addingForm-content" class="required">Obsah</label></div>
+
+        <div class="col-sm-6"><textarea name="content" class="form-control" id="frm-addingForm-content" required data-nette-rules='[{"op":":filled","msg":"This field is required."}]'></textarea></div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-3 control-label"></div>
+
+        <div class="col-sm-6"><input type="submit" name="send" class="btn btn-primary" value="Poslat"></div>
+    </div>
+    <input type="hidden" name="do" value="add">
+</form>
+    <div n:snippet="articles" data-ajax-append>
+        {ifset $variable}
+            <h1>{$variable}</h1>
+        {/ifset}
+    </div>
+<a href="/article/?something=content&next=ballak&nextone=neco&do=add"
+   class="ajax">Poslat článek</a>
+{block scripts}
+    <script src="{$basePath}/js/jquery.js"></script>
+    <script src="{$basePath}/js/netteForms.js"></script>
+    <script src="{$basePath}/js/nette.ajax.js-master/nette.ajax.js"></script>
+{/block}
+<script>
+    $(function () {
+        $.nette.ext('init').formSelector = 'form.form-horizontal.ajax';
+        $.nette.ext('init').buttonSelector = 'input.btn.btn-primary.ajax[type="submit"]';
+        $.nette.ext('forms');
+    });
+</script>

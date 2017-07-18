@@ -32,7 +32,7 @@ class ArticlePresenter extends BasePresenter
         $form->onSuccess[] = [$this, 'handleAdd'];
         return $form;
     }
-    public function handleAddArticle(UI\Form $form, $values)
+    public function handleAddArticle($values)
     {
         echo "Test";
         print_r($values);
@@ -50,10 +50,10 @@ class ArticlePresenter extends BasePresenter
 
         }
     }
-    public function handleAdd()
+    public function handleAdd($values,$next,$nextone)
     {
         if ($this->isAjax()) {
-            $this->template->variable = 'Ajax works!';
+            $this->template->variable = 'Ajax works!' . $values . $next;
             $this->redrawControl('articles');
         }else
         {
